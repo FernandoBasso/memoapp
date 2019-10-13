@@ -1,5 +1,10 @@
 # MemoApp
 
+NOTE: [The official repository for this project is on GitLab](https://gitlab.com/fernandobasso/memoapp).
+
+NOTE: For now, the devel branch is where the cool stuff takes place.
+
+
 This is MemoApp, an application that attempts to be similar to Zim Wiki, except using Markdown as the underlying language.
 
 Future ideas may involve supporting extra stuff not present in Markdown, perhaps something like Asciidoctor, and even far in the future, include fetures found in Anki for flashcard-related stuff.
