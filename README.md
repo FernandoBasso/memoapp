@@ -15,6 +15,14 @@ Application has these main areas and features:
 - Markdown behind the scenes
 
 
+## Git Guidelines
+
+Start commit subject messages with one of these:
+
+- `minor`: for minor, trivial stuff.
+- `poc`: prof of concept attempt.
+- `fix`: fix something like spelling.
+- `ref`: refactorings
 
 
 <!-- vim: set conceallevel=0: -->

@@ -1,0 +1,5 @@
+# Glade, UI and XML backup files.
+*.glade~
+*.ui~
+*.xml
+
