@@ -1,25 +1,22 @@
+"""Main module."""
+
+
 import sys
 
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import GLib, Gio, Gtk
 
-from pprint import pprint
-
-# NOTE: Not being used for this attempt.
-class AppWindow(Gtk.ApplicationWindow):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
 
 class Application(Gtk.Application):
+    """The Stupendousu Gtk Application Class"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, application_id="org.opensource.mynotes",
                          flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE,
                          **kwargs)
         self.window = None
+        self.builder = None
 
         self.add_main_option("test", ord("t"), GLib.OptionFlags.NONE,
                              GLib.OptionArg.NONE, "Command line test", None)
@@ -62,6 +59,7 @@ class Application(Gtk.Application):
                              "\n** Like Headings\n** and other stuf...")
 
     def do_command_line(self, command_line):
+        """Handles command line arguments."""
         options = command_line.get_options_dict()
         # convert GVariantDict -> GVariant -> dict
         options = options.end().unpack()
@@ -73,13 +71,15 @@ class Application(Gtk.Application):
         return 0
 
     def on_about(self, action, param):
+        """The About dialog."""
         about_dialog = Gtk.AboutDialog(transient_for=self.window, modal=True)
         about_dialog.present()
 
     def on_quit(self, action, param):
+        """Quits the application."""
         self.quit()
 
 if __name__ == "__main__":
-    app = Application()
-    app.run(sys.argv)
+    MEMO_APP = Application()
+    MEMO_APP.run(sys.argv)
 
