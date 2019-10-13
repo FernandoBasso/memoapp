@@ -9,10 +9,10 @@ from gi.repository import GLib, Gio, Gtk
 
 
 class Application(Gtk.Application):
-    """The Stupendousu Gtk Application Class"""
+    """The Stupendous Gtk Application Class"""
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, application_id="org.opensource.mynotes",
+        super().__init__(*args, application_id="org.opensource.memoapp",
                          flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE,
                          **kwargs)
         self.window = None
@@ -25,9 +25,8 @@ class Application(Gtk.Application):
         Gtk.Application.do_startup(self)
 
 
-    def do_activate(self):
+    def do_activate(self, foo):
         if not self.window:
-            # self.window = AppWindow(application=self, title="My Notes")
             self.builder = Gtk.Builder()
             self.builder.add_from_file("./memoapp.ui")
             app_window = self.builder.get_object("app_window")
@@ -42,7 +41,7 @@ class Application(Gtk.Application):
         self.window.present()
 
     def docs_tree(self):
-        """Handles the managment of the left document tree view."""
+        """Handles the management of the left document tree view."""
         tb_docs_tree = self.builder.get_object("tb_docs_tree")
         tb_docs_tree.set_text("- Will be\n- Filled with\n- list of docs")
 
@@ -53,7 +52,7 @@ class Application(Gtk.Application):
                              "\n♫ ♩ ♬ ♭ ♪ ☺ ♥")
 
     def doc_info(self):
-        """Handles the managment of the document info right view."""
+        """Handles the management of the document info right view."""
         tb_doc_info = self.builder.get_object("tb_doc_info")
         tb_doc_info.set_text("* Will contain\n* Current Document\n* Information..."
                              "\n** Like Headings\n** and other stuf...")
@@ -65,7 +64,7 @@ class Application(Gtk.Application):
         options = options.end().unpack()
 
         if "test" in options:
-            print("Test argument recieved: %s" % options["test"])
+            print("Test argument received: %s" % options["test"])
 
         self.activate()
         return 0
