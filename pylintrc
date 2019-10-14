@@ -139,7 +139,7 @@ disable=print-statement,
         deprecated-sys-function,
         exception-escape,
         comprehension-escape,
-        trailing-newline,
+        trailing-newlines,
         wrong-import-position,
         arguments-differ,
         unused-argument

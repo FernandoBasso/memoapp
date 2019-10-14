@@ -1,5 +1,6 @@
-"""Main module."""
+#!/usr/bin/python3
 
+"""Main module."""
 
 import sys
 
@@ -12,7 +13,7 @@ class Application(Gtk.Application):
     """The Stupendous Gtk Application Class"""
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, application_id="org.opensource.memoapp",
+        super().__init__(*args, application_id="org.gnu.memoapp",
                          flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE,
                          **kwargs)
         self.window = None
@@ -25,7 +26,7 @@ class Application(Gtk.Application):
         Gtk.Application.do_startup(self)
 
 
-    def do_activate(self, foo):
+    def do_activate(self):
         if not self.window:
             self.builder = Gtk.Builder()
             self.builder.add_from_file("./memoapp.ui")
