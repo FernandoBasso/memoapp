@@ -20,6 +20,15 @@ Application has these main areas and features:
 - Markdown behind the scenes
 
 
+## Tasks
+
+The list of tasks that need to be performed.
+
+- [x] Display the three columns.
+- [ ] (currently being worked on) Parse the markdown headings and display them like headings in the main editing window.
+- [ ] Display the headings outline on the doc info view.
+
+
 ## Git Guidelines
 
 Start commit subject messages with one of these:
