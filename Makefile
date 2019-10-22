@@ -9,7 +9,18 @@ OBJDIR = obj
 SOURCES := $(wildcard $(SRCDIR)/*.c)
 OBJECTS := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-all: main
+all: memoapp
+
+#
+# Generates src/ui-resources.c from the UI description files. Run this
+# when building the project for the first time and when a UI file is changed.
+#
+gresources:
+	glib-compile-resources \
+		src/memoapp.gresource.xml \
+		--target src/ui-resources.c \
+		--sourcedir=src \
+		--generate-source
 
 $(OBJECTS): $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -17,7 +28,7 @@ $(OBJECTS): $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@echo "SOURCES: $(SOURCES)"
 	@echo
 
-main: $(OBJECTS)
+memoapp: $(OBJECTS)
 	$(CC) -o $(@F) $(OBJECTS) $(LIBS)
 	@echo
 	@echo "OBJECTS: $(OBJECTS)"
@@ -25,5 +36,5 @@ main: $(OBJECTS)
 
 clean:
 	rm -f $(OBJECTS)
-	rm -f main
+	rm -f memoapp
 

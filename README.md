@@ -42,18 +42,19 @@ Start commit subject messages with one of these:
 
 ## Dev Setup
 
+NOTE: Instead of using an IDE with a ready (and sometimes bloated) template, I decided to do things step-by-step, learning along the way and setting things up as needed, keeping things as minimal and simple as possible.
+
 Make sure the Gtk (3) dev stuff is installed. On Arch Linux, the header files are always packaged with the program/lib they relate to. For example, if Gtk is installed, you are ready to develop and compile Gtk applications because that package contains the header files and installs them under `/usr/include/` subdirectories. On a Debian-based distro, one generally needs to install the _-dev_ packages, like `libgtk-3-dev` or something like that.
 
 
 ### Compiling and Running
 
-Basically, we need to translate the UI resources to a `.c` file and then run `make all`:
+Basically, we need to translate the UI resources to a `.c` file and then run compile everything:
 
 ```shell
-$ cd src
-$ glib-compile-resources memoapp.gresource.xml \
-    --target ui-resources.c \
-    --generate-source
+$ make gresources
+$ make all
+$ ./memoapp
 ```
 
 The `ui-resource.c` file only needs to be regenerated if an UI or XML resource file is modified.

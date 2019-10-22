@@ -1,5 +1,14 @@
+#
+# .gitignore
+#
+
 # Glade, UI and XML backup files.
 *.glade~
 *.ui~
-*.xml
+
+# Object files generated during the build process.
+*.o
+
+# The compiled, runnable program.
+memoapp
 
