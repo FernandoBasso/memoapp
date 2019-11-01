@@ -1,29 +1,17 @@
-/* memoapp-window.h
- *
- * Copyright 2019 Unknown
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-#pragma once
+#ifndef __MEMOAPP_WINDOW_H
+#define __MEMOAPP_WINDOW_H
 
 #include <gtk/gtk.h>
+#include "memoapp.h"
 
-G_BEGIN_DECLS
 
-#define MEMOAPP_TYPE_WINDOW (memoapp_window_get_type())
+#define MEMOAPP_WINDOW_TYPE (memoapp_window_get_type ())
+G_DECLARE_FINAL_TYPE (MemoAppWindow, memoapp_window, MEMOAPP, WINDOW, GtkApplicationWindow)
 
-G_DECLARE_FINAL_TYPE (MemoappWindow, memoapp_window, MEMOAPP, WINDOW, GtkApplicationWindow)
 
-G_END_DECLS
+MemoAppWindow       *memoapp_window_new       (MemoApp *app);
+void                 memoapp_window_open      (MemoAppWindow *win,
+                                               GFile         *file);
+
+
+#endif /* __MEMOAPP_WINDOW_H */

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.8 -->
+  <template class="MemoAppWindow" parent="GtkApplicationWindow">
+    <property name="title" translatable="yes">λ MemoApp λ</property>
+    <property name="default-width">1280</property>
+    <property name="default-height">960</property>
+    <child>
+      <object class="GtkBox" id="content_box">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+      </object>
+    </child>
+  </template>
+</interface>

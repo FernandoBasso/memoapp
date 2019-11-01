@@ -1,6 +1,6 @@
 CC ?= gcc
 PKGCONFIG = $(shell which pkg-config)
-CFLAGS = $(shell $(PKGCONFIG) --cflags gtk+-3.0)
+CFLAGS = -Wall -pedantic $(shell $(PKGCONFIG) --cflags gtk+-3.0)
 LIBS = $(shell $(PKGCONFIG) --libs gtk+-3.0)
 
 SRCDIR = src
@@ -17,7 +17,7 @@ all: memoapp
 #
 gresources:
 	glib-compile-resources \
-		src/memoapp.gresource.xml \
+		src/ui/memoapp.gresource.xml \
 		--target src/ui-resources.c \
 		--sourcedir=src \
 		--generate-source
@@ -37,4 +37,4 @@ memoapp: $(OBJECTS)
 clean:
 	rm -f $(OBJECTS)
 	rm -f memoapp
-
+	rm -f src/ui-resources.c
