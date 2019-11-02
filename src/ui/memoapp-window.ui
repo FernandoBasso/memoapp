@@ -1,14 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.8 -->
+  <!-- interface-requires gtk+ 3.20 -->
+
+  <object class="GtkTextBuffer" id="tb_docs_tree">
+    <!--
+      @TODO: Remove this hard-coded text in the future. It
+      is currently here so we have something on the screen
+      until we implement each feature.
+    -->
+    <property name="text">
+      - Main File
+      - Programming
+        - C
+        - Lisp
+        - Haskell
+      - Math
+        - Algebra
+        - Trigonometry
+    </property>
+  </object>
+
+  <object class="GtkTextBuffer" id="tb_doc_edit">
+    <!--
+      @TODO: Remove this hard-coded text in the future. It
+      is currently here so we have something on the screen
+      until we implement each feature.
+    -->
+    <property name="text">
+      "" Thy false promise and my sure misfortune carry me to a place whence the news of my death will reach thy ears before the words of my complaint. Ungrateful one, thou hast rejected me for one more wealthy, but not more worthy; but if virtue were esteemed wealth I should neither envy the fortunes of others nor weep for misfortunes of my own. What thy beauty raised up thy deeds have laid low; by it I believed thee to be an angel, by them I know thou art a woman. Peace be with thee who hast sent war to me, and Heaven grant that the deceit of thy husband be ever hidden from thee, so that thou repent not of what thou hast done, and I reap not a revenge I would not have."" - Don Quixote
+
+      λ É realmente um lívro incrível ✔
+
+      :) 💩
+    </property>
+  </object>
+
+  <object class="GtkTextBuffer" id="tb_doc_info">
+    <!--
+      @TODO: Remove this hard-coded text in the future. It
+      is currently here so we have something on the screen
+      until we implement each feature.
+    -->
+    <property name="text">
+      - Title Here
+      - Introduction
+      - First Steps
+        - Example 1
+        - Example 2
+      - Advanced Examples
+        - Example 3
+        - Full application example
+          - Refactoring and Cleanning Up
+      - Conclusion
+    </property>
+  </object>
+
   <template class="MemoAppWindow" parent="GtkApplicationWindow">
     <property name="title" translatable="yes">λ MemoApp λ</property>
     <property name="default-width">1280</property>
-    <property name="default-height">960</property>
+    <property name="default-height">720</property>
     <child>
       <object class="GtkBox" id="content_box">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkPaned" id="outer_pane">
+            <property name="visible">True</property>
+            <property name="expand">True</property>
+            <property name="wide-handle">True</property>
+            <child>
+
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="width-request">240</property>
+
+                <!-- Doc Tree View -->
+                <child>
+                  <object class="GtkScrolledWindow">
+                    <property name="visible">True</property>
+                    <property name="expand">True</property>
+                    <child>
+                      <object class="GtkTextView">
+                        <property name="visible">True</property>
+                        <property name="buffer">tb_docs_tree</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="expand">True</property>
+
+                <child>
+                  <object class="GtkPaned" id="inner_pane">
+                    <property name="visible">True</property>
+                    <property name="expand">True</property>
+                    <property name="wide-handle">True</property>
+
+                    <!-- Main View, the document to edit -->
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="expand">True</property>
+
+                        <child>
+                          <object class="GtkScrolledWindow">
+                            <property name="visible">True</property>
+                            <property name="expand">True</property>
+                            <child>
+                              <object class="GtkTextView">
+                                <property name="visible">True</property>
+                                <property name="buffer">tb_doc_edit</property>
+                                <property name="wrap-mode">GTK_WRAP_WORD</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="resize">True</property>
+                        <property name="shrink">False</property>
+                      </packing>
+                    </child>
+
+                    <!-- The document info tree, headings, tags, etc. -->
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="expand">False</property>
+                        <property name="width-request">260</property>
+                        <child>
+                          <object class="GtkScrolledWindow">
+                            <property name="visible">True</property>
+                            <property name="expand">True</property>
+                            <child>
+                              <object class="GtkTextView">
+                                <property name="visible">True</property>
+                                <property name="buffer">tb_doc_info</property>
+                                <property name="wrap-mode">GTK_WRAP_WORD</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                      </object>
+                      <packing>
+                        <property name="resize">False</property>
+                        <property name="shrink">True</property>
+                      </packing>
+                    </child>
+
+                  </object>
+                </child>
+
+              </object>
+
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </template>
