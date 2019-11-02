@@ -13,5 +13,8 @@ max_line_length = 120
 indent_style = tab
 indent_size = 4
 
+[.git/COMMIT_EDITMSG]
+max_line_length = 80
+
 [*.{c,css}]
 indent_size = 2
