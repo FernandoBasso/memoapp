@@ -9,6 +9,9 @@
 # Object files generated during the build process.
 *.o
 
+# The generated ui-resources C file.
+src/ui-resources.c
+
 # The compiled, runnable program.
 memoapp
 
