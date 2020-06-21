@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.20 -->
+
+  <template class="MemoAppProjects" parent="GtkWindow">
+    <property name="title">MemoApp Projects</property>
+    <property name="default-width">600</property>
+    <property name="default-height">400</property>
+    <child>
+      <object id="proj-list" class="GtkBox">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+
+
+        <child>
+          <object class="GtkGrid">
+            <property name="visible">1</property>
+            <child>
+              <object class="GtkStackSwitcher">
+                <property name="visible">True</property>
+                <property name="stack">stack_projects_setup</property>
+                <property name="halign">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkStack" id="stack_projects_setup">
+                <property name="visible">1</property>
+                <property name="can_focus">1</property>
+                <property name="expand">true</property>
+                <property name="transition-type">GTK_STACK_TRANSITION_TYPE_SLIDE_UP</property>
+                <property name="visible-child-name">page_project_create</property>
+
+                <!-- List Projects Page -->
+                <child>
+                  <object class="GtkBox" id="page_projects_list">
+                    <property name="visible">true</property>
+                    <property name="orientation">vertical</property>
+                    <!-- <property name="name">projects-list</property> -->
+
+                    <!-- Title and intro at the Top. -->
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="orientation">vertical</property>
+                        <property name="halign">center</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="label">MemoApp</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+
+
+                    <!-- List of Projects and Add / Remove projects buttons. -->
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="orientation">horizontal</property>
+
+                        <!-- List Of Projects. -->
+                        <child>
+                          <object class="GtkScrolledWindow">
+                            <property name="visible">True</property>
+                            <property name="min-content-width">400</property>
+                            <property name="min-content-height">150</property>
+
+                            <child>
+                              <object class="GtkTreeView" id="treeview">
+                                <!-- <property name="model">store_projects</property> -->
+                                <property name="hexpand">true</property>
+                                <property name="visible">True</property>
+
+                                <!-- Columns added with C code. -->
+
+                                <child internal-child="selection">
+                                  <object class="GtkTreeSelection" id="selection">
+                                    <signal name="changed" handler="on_treeview_selection_changed"/>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+
+
+                          </object>
+                        </child>
+
+                        <!-- Add Remove Actions on the right. -->
+                        <child>
+                          <object class="GtkButtonBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
+                            <property name="valign">GTK_ALIGN_FILL</property>
+                            <property name="layout-style">GTK_BUTTONBOX_SPREAD</property>
+                            <child>
+                              <object id="btn_add_project" class="GtkButton">
+                                <property name="visible">True</property>
+                                <property name="label">Add</property>
+                                <property name="hexpand">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object id="btn_remove_project" class="GtkButton">
+                                <property name="visible">True</property>
+                                <property name="label">Remove</property>
+                                <property name="hexpand">True</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                      </object>
+                    </child>
+
+
+                    <!-- Cancel / OK buttons at the bottom. -->
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="orientation">vertical</property>
+                        <property name="baseline_position">bottom</property>
+                        <child>
+                          <object class="GtkGrid">
+                            <property name="orientation">vertical</property>
+                            <property name="visible">True</property>
+                            <child>
+                              <object id="btn_cancel" class="GtkButton">
+                                <property name="visible">True</property>
+                                <property name="label">Cancel</property>
+                                <property name="hexpand">True</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object id="btn_ok" class="GtkButton">
+                                <property name="visible">True</property>
+                                <property name="label">OK</property>
+                                <property name="hexpand">True</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="pack_type">end</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                      </object>
+
+                    </child>
+
+                  </object>
+                  <packing>
+                    <property name="name">page_projects_list</property>
+                    <property name="title" translatable="yes">Projects List</property>
+                    <!-- <property name="icon-name">folder-visiting</property> -->
+                  </packing>
+
+                </child>
+
+                <!-- Create Project Page -->
+                <child>
+                  <object class="GtkGrid" id="page_project_create">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="border_width">10</property>
+                    <property name="row_spacing">5</property>
+                    <property name="column_spacing">5</property>
+                    <property name="column_homogeneous">True</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">end</property>
+                        <property name="label" translatable="yes">Name</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="project_name">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">0</property>
+                        <property name="width">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">end</property>
+                        <property name="label" translatable="yes">Location</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="project_folder">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkFileChooserButton" id="project_folder_chooser">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="action">GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER</property>
+                        <property name="title" translatable="yes"/>
+                      </object>
+                      <packing>
+                        <property name="left_attach">3</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+
+                    <child>
+                      <object class="GtkButton" id="btn_project_create">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Create Project</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">2</property>
+                      </packing>
+                    </child>
+
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+
+                  <packing>
+                    <property name="name">page_project_create</property>
+                    <property name="title" translatable="yes">Create Project</property>
+                  </packing>
+                </child>
+
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+
+      </object>
+
+    </child>
+  </template>
+
+</interface>
+

@@ -12,3 +12,4 @@ MemoApp     *memoapp_new         (void);
 
 
 #endif /* __MEMOAPP_H */
+

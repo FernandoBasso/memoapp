@@ -1,0 +1,7 @@
+data/org.gtk.memoapp.desktop.in
+data/org.gtk.memoapp.appdata.xml.in
+data/org.gtk.memoapp.gschema.xml
+src/memoapp-window.ui
+src/main.c
+src/memoapp-window.c
+

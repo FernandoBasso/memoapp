@@ -45,11 +45,22 @@ NOTE: Instead of using an IDE (gnome-builder, anjuta, etc) with a ready (and som
 
 Make sure the Gtk (3) dev stuff is installed. On Arch Linux, the header files are always packaged with the program/lib they relate to. For example, if Gtk is installed, you are ready to develop and compile Gtk applications because that package contains the header files and installs them under `/usr/include/` subdirectories. On a Debian-based distro, one generally needs to install the _-dev_ packages, like `libgtk-3-dev` or something like that.
 
+NOTE: As of now, I am thinking of maitaining two build setups, one with Meson and Ninja, and the other with good old Makefiles. The reason is two fold: learn and practice both ways of building C/Gtk projects, and also because I do not know yet which one gives less trouble in the long run.
 
-=== Compiling and Running
+=== Compiling with Ninja and Meson
+
+.building and running
+[source,shell-session
+----
+$ ninja -C build
+$ ./build/meson-out/memoapp
+----
+
+=== Compiling with make
 
 Basically, we need to translate the UI resources to a `.c` file and then run compile everything. Take a look at the `Makefile`.
 
+.building and running
 [source,shell-session]
 ----
 $ make clean
@@ -76,6 +87,31 @@ There are link:https://developer.gnome.org/gtk3/stable/gtk-running.html[docs on 
 === Vim
 
 It looks like ALE and YCM were both doing linting. Disabled ALE for now and YCM is indeed doing some linting on its own. `.ycm_extra_conf.py` barely configured with Gtk stuff.
+
+For CCLS, in Vim, run `:CocConfig` and paste this:
+
+[source,json]
+----
+{
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [".ccls-root", "compile_commands.json"],
+      "initializationOptions": {
+        "cache": {
+          "directory": ".ccls-cache"
+        },
+        "client": {
+          "snippetSupport": true
+        },
+        "compilationDatabaseDirectory": "builddir"
+      }
+    }
+  },
+  "python.jediEnabled": false
+}
+----
 
 === VSCode
 

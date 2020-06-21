@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/gtk/memoapp">
+    <!-- <file>memoapp-window.ui</file> -->
     <file preprocess="xml-stripblanks">ui/memoapp-menubar.ui</file>
     <file preprocess="xml-stripblanks">ui/memoapp-window.ui</file>
     <file preprocess="xml-stripblanks">ui/memoapp-projects.ui</file>

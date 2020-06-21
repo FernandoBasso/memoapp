@@ -2,16 +2,36 @@
 # .gitignore
 #
 
+#
 # Glade, UI and XML backup files.
+#
 *.glade~
 *.ui~
 
+#
 # Object files generated during the build process.
+#
 *.o
 
+#
 # The generated ui-resources C file.
+#
 src/ui-resources.c
 
-# The compiled, runnable program.
+#
+# The Makefile compiled, runnable program.
+#
 memoapp
+
+# CCLS cache dir.
+.ccls-cache
+
+#
+# Meson Build Dirs
+#
+build
+builddir
+
+.vscode
+
 

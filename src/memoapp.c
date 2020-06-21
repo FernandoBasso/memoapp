@@ -1,14 +1,14 @@
 #include <gtk/gtk.h>
-
 #include "memoapp.h"
 #include "memoapp-window.h"
+#include "memoapp-projects.h"
 
 struct _MemoApp
 {
   GtkApplication parent;
 };
 
-G_DEFINE_TYPE(MemoApp, memoapp, GTK_TYPE_APPLICATION)
+G_DEFINE_TYPE (MemoApp, memoapp, GTK_TYPE_APPLICATION)
 
 static void
 memoapp_init (MemoApp *app)
@@ -17,12 +17,12 @@ memoapp_init (MemoApp *app)
 }
 
 /**
- * Callback function for the "quit" action
+ * Callback function for the "quit" action.
  */
 static void
 quit_callback (GSimpleAction *simple,
-         GVariant      *parameter,
-         gpointer       user_data)
+               GVariant      *parameter,
+               gpointer       user_data)
 {
   GApplication *app = user_data;
 
@@ -33,8 +33,9 @@ quit_callback (GSimpleAction *simple,
 
 static GActionEntry app_entries[] =
 {
-  { "quit", quit_callback, NULL, NULL, NULL }
+  { "quit", quit_callback, NULL, NULL, NULL, }
 };
+
 
 static void
 memoapp_startup (GApplication *app)
@@ -47,7 +48,8 @@ memoapp_startup (GApplication *app)
   G_APPLICATION_CLASS (memoapp_parent_class)->startup (app);
 
   g_action_map_add_action_entries (G_ACTION_MAP (app),
-                                   app_entries, G_N_ELEMENTS (app_entries),
+                                   app_entries,
+                                   G_N_ELEMENTS (app_entries),
                                    app);
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
@@ -64,37 +66,36 @@ memoapp_startup (GApplication *app)
 static void
 memoapp_activate (GApplication *app)
 {
+  short projects_status;
+
   MemoAppWindow *win;
+  MemoAppProjects *projects;
 
   win = memoapp_window_new (MEMO_APP (app));
-  gtk_window_present (GTK_WINDOW (win));
+
+  projects = memoapp_projects_new (&projects_status);
+
+  fprintf(stdout, "%s\n", "IT FUCKING WORKS!");
+
+  g_print ("== %hd\n", projects_status);
+
+  if (projects_status == 1) {
+    gtk_window_present (GTK_WINDOW (win));
+  }
+  else {
+    g_print("%s\n", "error selecting project");
+    g_application_quit (G_APPLICATION (app));
+  }
 }
 
-static void
-memoapp_open (GApplication    *app,
-              GFile           **files,
-              gint            n_files,
-              const gchar     *hint)
-{
-  GList *windows;
-  MemoAppWindow *win;
-
-  windows = gtk_application_get_windows (GTK_APPLICATION (app));
-  if (windows)
-    win = MEMOAPP_WINDOW (windows->data);
-  else
-    win = memoapp_window_new (MEMO_APP (app));
-
-  gtk_window_present (GTK_WINDOW (win));
-}
 
 static void
 memoapp_class_init (MemoAppClass *class)
 {
   G_APPLICATION_CLASS (class)->startup = memoapp_startup;
   G_APPLICATION_CLASS (class)->activate = memoapp_activate;
-  G_APPLICATION_CLASS (class)->open = memoapp_open;
 }
+
 
 MemoApp *
 memoapp_new (void)
@@ -104,3 +105,4 @@ memoapp_new (void)
                        "flags", G_APPLICATION_HANDLES_OPEN,
                        NULL);
 }
+
